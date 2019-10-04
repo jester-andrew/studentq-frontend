@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+<form>
+    <div id="formWrapper">
+        <div class="alert alert-danger">
+            *Login is only for Instructors and Lab Assistants.
+        </div>
+        <div class="form-group">
+            <label for="email"><span class="red">*</span>Email:</label>
+            <input id="email" type="text" class="form-control" placeholder="Enter email" #email>
+        </div>
+        <div class="form-group">
+            <label for="password"><span class="red">*</span>Password:</label>
+            <input id="password" type="password" class="form-control" placeholder="Enter password" #password>
+        </div>
+        <div class="flex">
+            <button type="button" class="btn btn-primary" (click)="login(email.value, password.value)">Login</button>
+        </div>
+    </div>
+</form>

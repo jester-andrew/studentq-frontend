@@ -1,3 +1,64 @@
-<p>
-  que works!
-</p>
+<div class="flex">
+    <button class="btn btn-success" (click)="openModal()">Request Help</button>
+    <select (change)="labChange(lab.value)" #lab [innerHTML]="labOptions | sanitizeHTML">
+      
+      
+    </select>
+</div>
+
+<!-- que -->
+<table class="table table-hover" id="que">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Class</th>
+            <th scope="col">Question/Problem</th>
+            <th scope="col">Campus/Online</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody [innerHTML]="requestRows">
+
+    </tbody>
+</table>
+
+<!-- help form modal -->
+<section *ngIf="register">
+    <div class="container">
+        <h2>Help Request</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" #name>
+            </div>
+            <div class="form-group">
+                <label for="class">Class</label>
+                <select id="class" #course>
+                  <option value="" disabled>Pick course</option>
+                  <option>CIT 160</option>
+                  <option>CIT 230</option>
+                  <option>CIT 336</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="question">Problem/Question</label>
+                <textarea id="question" class="form-control" cols="30" rows="10" #problem></textarea>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <select id="location" #location>
+                  <option disabled>Location</option>
+                  <option>Campus</option>
+                  <option>Online</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" #email>
+            </div>
+            <button type="button" class="btn btn-danger" (click)="closeModal()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="gethelp(name.value, course.value, problem.value, location.value, email.value)">Get Help</button>
+        </form>
+    </div>
+</section>

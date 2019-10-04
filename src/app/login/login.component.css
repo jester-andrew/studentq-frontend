@@ -1,0 +1,15 @@
+#formWrapper {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5em;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.red {
+    color: red;
+}

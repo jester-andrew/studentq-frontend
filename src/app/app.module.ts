@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { QueComponent } from './que/que.component';
 import { LabInfoComponent } from './lab-info/lab-info.component';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SanitizeHTMLPipe } from './sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { LoginComponent } from './login/login.component';
     routingComponents,
     QueComponent,
     LabInfoComponent,
-    LoginComponent
+    LoginComponent,
+    SanitizeHTMLPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

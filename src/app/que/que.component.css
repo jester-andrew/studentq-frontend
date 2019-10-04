@@ -1,0 +1,13 @@
+.flex {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 2.1em;
+    width: 48%;
+}
+
+#que {
+    width: 95%;
+    margin: auto;
+}
