@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { LoginService } from '../login.service';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +8,14 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  loggedin:boolean = false;
+  permissionLA:boolean = false;
+  permissionPro:boolean = false;
+  permissionAdm:boolean = false;
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+    
   }
 
   login(email, password){
@@ -18,11 +23,16 @@ export class LoginComponent implements OnInit {
       email: email,
       password: password
     }
-    console.log(loginCreds)
     this.loginService.loginUser(loginCreds).subscribe((auth:any) =>{
-      sessionStorage.setItem('auth', auth.auth);
+      sessionStorage.setItem('auth', JSON.stringify(auth.auth));
+      if(auth != null){
+        this.loggedin = true;
+      }
+      console.log('event emitted: {"loggedin": true, "permissions":"'+auth.auth.permissions+'"}');
+      // window.location.replace('getHelp');
     });
 
   }
+
 
 }

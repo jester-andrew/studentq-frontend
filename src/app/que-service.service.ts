@@ -9,6 +9,7 @@ export class QueServiceService {
   getHelpRequestAPI:string = this.domain + 'que';
   insertRestAPI:string = this.domain + 'enterq';
   getLabsAPI:string = this.domain + 'getLabs';
+  removeAPI:string = this.domain + 'removeq'
   constructor(private http: HttpClient) { }
 
   getRequests(dbCollectionAlias){
@@ -29,5 +30,20 @@ export class QueServiceService {
 
   getLabs(){
     return this.http.get(this.getLabsAPI);
+  }
+
+  deleteRequest(id, dbAlias){
+    console.log('deleting request');
+    let body = JSON.stringify({
+      id: id,
+      collection: dbAlias
+    });
+
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let options = { headers: headers };
+
+    return this.http.post(this.removeAPI, body, options);
+
+
   }
 }

@@ -16,10 +16,21 @@
             <th scope="col">Question/Problem</th>
             <th scope="col">Campus/Online</th>
             <th scope="col">Email</th>
+            <th scope="col" *ngIf="ta">Help Student</th>
+            <th scope="col" *ngIf="ta">Remove</th>
         </tr>
     </thead>
-    <tbody [innerHTML]="requestRows">
-
+    <tbody>
+        <tr *ngFor="let row of studentRequests;let i = index">
+            <th scope="col">{{i+1}}</th>
+            <td scope="col">{{row.name}}</td>
+            <td scope="col">{{row.class}}</td>
+            <td scope="col">{{row.question}}</td>
+            <td scope="col">{{row.campus}}</td>
+            <td scope="col">{{row.email}}</td>
+            <td scope="col"><button class="btn btn-success" (click)="helpStudent(row._id)" *ngIf="ta">Help</button></td>
+            <td scope="col"><button class="btn btn-danger" (click)="removeStudent(row._id)" *ngIf="ta">Remove</button></td>
+        </tr>
     </tbody>
 </table>
 

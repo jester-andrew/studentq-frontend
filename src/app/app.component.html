@@ -10,8 +10,8 @@
             <ul>
                 <li><a routerLink="getHelp">Get Help</a></li>
                 <li><a routerLink="labInfo">Lab Info</a></li>
-                <li><a routerLink="login">Login</a></li>
-                <li><a href="" *ngIf="flase">Logout</a></li>
+                <li><a routerLink="login" *ngIf="!loggedin">Login</a></li>
+                <li><a href="" *ngIf="loggedin">Logout</a></li>
             </ul>
             <div class="btn-group">
                 <div class="btn-primary dropdown-toggle change" data-toggle="dropdown" *ngIf="flase">
