@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QueServiceService } from '../que-service.service';
+import{ LoginService } from '../login.service';
 
 @Component({
   selector: 'app-que',
@@ -14,15 +15,15 @@ export class QueComponent implements OnInit {
   register:boolean = false;
   labOptions;
   ta:boolean = false;
-  constructor(private qservice: QueServiceService) { }
+  constructor(private qservice: QueServiceService, private loginBroadcast:LoginService) { }
 
   ngOnInit() {
 
     let auth = JSON.parse(sessionStorage.getItem('auth'));
     if(auth !== null){
-      if(auth.permissions === "Lab Assistant"){
-        this.ta = true;
-      }
+      // if(auth.permissions === "Lab Assistant"){
+      //   this.ta = true;
+      // }
       localStorage.setItem('selectedLab', auth.lab);
     }
 
@@ -43,13 +44,30 @@ export class QueComponent implements OnInit {
         }
       }
       this.labOptions = options;
-      console.log(this.labOptions);
+      
+      this.loginBroadcast.brodcast.subscribe((permissions:any) =>{
+        if(permissions.permissionsLA || permissions.permissionsPro || permissions.permissionsAdm){
+          this.ta = true;
+        }else{
+          this.ta = false;
+        }
+        
+      });
     });
 
     
-    setInterval(() => {
-        this.getHelpRequests()
-    }, 10000);
+    // setInterval(() => {
+    //     this.getHelpRequests()
+    // }, 10000);
+
+    this.qservice
+      .getRequest()
+      .subscribe((requestString: string) => {
+        console.log(requestString);
+        let request = JSON.parse(requestString);
+        console.log(request);
+        this.studentRequests = request;
+      });
   }
 
   labChange(lab:string){
@@ -61,7 +79,6 @@ export class QueComponent implements OnInit {
   }
 
   getHelpRequests(){
-    console.log('here');
     this.qservice.getRequests(this.selectedLab).subscribe((result) => {
         if(result['returnrd']){
           this.studentRequests = result['result'];
@@ -86,10 +103,7 @@ export class QueComponent implements OnInit {
       email: email,
       collection: this.selectedLab
     }
-    this.studentRequests.push(request);
-    this.qservice.insertRequest(request).subscribe((result) => {
-      console.log(result);
-    })
+    this.qservice.insertRequest(request)
   }
 
   helpStudent(id){
@@ -97,14 +111,15 @@ export class QueComponent implements OnInit {
   }
 
   removeStudent(id){
-    for(let i=0; i < this.studentRequests.length; i++){
-      if(this.studentRequests[i]._id == id){
-          this.studentRequests.splice(i,1)
-      }
-    }
-    this.qservice.deleteRequest(id, this.selectedLab).subscribe((result) =>{
-      console.log(result);
-    });
+    // for(let i=0; i < this.studentRequests.length; i++){
+    //   if(this.studentRequests[i]._id == id){
+    //       this.studentRequests.splice(i,1)
+    //   }
+    // }
+    this.qservice.deleteRequest(id, this.selectedLab)
+    // .subscribe((result) =>{
+    //   console.log(result);
+    // });
   }
 }
 

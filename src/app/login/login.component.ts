@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { LoginService } from '../login.service';
 import { EventEmitter } from 'events';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   permissionLA:boolean = false;
   permissionPro:boolean = false;
   permissionAdm:boolean = false;
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit() {
     
@@ -25,11 +26,32 @@ export class LoginComponent implements OnInit {
     }
     this.loginService.loginUser(loginCreds).subscribe((auth:any) =>{
       sessionStorage.setItem('auth', JSON.stringify(auth.auth));
-      if(auth != null){
-        this.loggedin = true;
+      let permissions = {
+        loggedin: false,
+        permissionsLA:false,
+        permissionPro:false,
+        permissionAdm:false
       }
-      console.log('event emitted: {"loggedin": true, "permissions":"'+auth.auth.permissions+'"}');
-      // window.location.replace('getHelp');
+
+      if(auth != null){
+        permissions.loggedin = true;
+      }
+
+      if(auth.auth.permissions == 'Lab Assistant'){
+        permissions.permissionsLA = true;
+      }
+
+      if(auth.auth.permissions == 'Professor'){
+        permissions.permissionPro = true;
+      }
+
+      if(auth.auth.permissions == 'Admin'){
+        permissions.permissionAdm = true;
+      }
+
+      this.loginService.editPermissions(permissions);
+      
+      this.router.navigate(['getHelp']);
     });
 
   }

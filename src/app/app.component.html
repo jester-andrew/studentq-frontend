@@ -11,18 +11,18 @@
                 <li><a routerLink="getHelp">Get Help</a></li>
                 <li><a routerLink="labInfo">Lab Info</a></li>
                 <li><a routerLink="login" *ngIf="!loggedin">Login</a></li>
-                <li><a href="" *ngIf="loggedin">Logout</a></li>
+                <li><a href="" *ngIf="loggedin" (click)=logout()>Logout</a></li>
             </ul>
-            <div class="btn-group">
-                <div class="btn-primary dropdown-toggle change" data-toggle="dropdown" *ngIf="flase">
+            <div class="btn-group" *ngIf="loggedin">
+                <div class="btn-primary dropdown-toggle change" data-toggle="dropdown">
                     Admin
                 </div>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Reports</a>
-                    <a class="dropdown-item" href="#" *ngIf="flase">Lab Assistant</a>
-                    <a class="dropdown-item" href="#">Courses</a>
-                    <a class="dropdown-item" href="#" *ngIf="flase">Availability</a>
-                    <a class="dropdown-item" href="#">Labs</a>
+                    <a class="dropdown-item" href="#" *ngIf="permissionPro || permissionAdm">Reports</a>
+                    <a class="dropdown-item" href="#" *ngIf="permissionPro || permissionAdm">Lab Assistant</a>
+                    <a class="dropdown-item" href="#" *ngIf="permissionPro || permissionAdm">Courses</a>
+                    <a class="dropdown-item" href="#" *ngIf="permissionLA || permissionPro || permissionAdm">Availability</a>
+                    <a class="dropdown-item" href="#" *ngIf="permissionAdm">Labs</a>
                 </div>
             </div>
         </nav>

@@ -1,12 +1,12 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { LoginComponent } from './login/login.component';
+import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
   
   title = 'studentq';
   loggedinInfo;
@@ -15,17 +15,24 @@ export class AppComponent implements AfterViewInit {
   permissionPro:boolean = false;
   permissionAdm:boolean = false;
 
-  @ViewChild(LoginComponent) login;
-
-  ngAfterViewInit(): void {
-    this.loggedin = this.login.loggedin;
+  constructor(private loginBroadcast:LoginService){}
+  ngOnInit(): void {
+    this.loginBroadcast.brodcast.subscribe((permissions:any) =>{
+        this.loggedin = permissions.loggedin;
+        this.permissionLA = permissions.permissionsLA;
+        this.permissionPro = permissions.permissionPro;
+        this.permissionAdm = permissions.permissionAdm;
+    });
   }
 
 
-  fixNavigation(data){
-    console.log('being called');
-    this.loggedinInfo = JSON.parse(data);
+  logout(){
+    this.loggedin = false;
+    this.permissionAdm = false;
+    this.permissionPro = false;
+    this.permissionLA = false;
 
-    this.loggedin = this.loggedinInfo.loggedin
+    sessionStorage.removeItem('auth');
   }
+
 }
