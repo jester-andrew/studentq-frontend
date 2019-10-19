@@ -17,19 +17,17 @@
             <th scope="col">Campus/Online</th>
             <th scope="col">Email</th>
             <th scope="col" *ngIf="ta">Help Student</th>
-            <th scope="col" *ngIf="ta">Remove</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of studentRequests;let i = index">
+        <tr *ngFor="let row of studentRequests;let i = index" class="{{row.beingHelped}}">
             <th scope="col">{{i+1}}</th>
             <td scope="col">{{row.name}}</td>
             <td scope="col">{{row.class}}</td>
             <td scope="col">{{row.question}}</td>
             <td scope="col">{{row.campus}}</td>
             <td scope="col">{{row.email}}</td>
-            <td scope="col"><button class="btn btn-success" (click)="helpStudent(row._id)" *ngIf="ta">Help</button></td>
-            <td scope="col"><button class="btn btn-danger" (click)="removeStudent(row._id)" *ngIf="ta">Remove</button></td>
+            <td scope="col"><button class="btn btn-success" (click)="helpStudent(row)" *ngIf="ta">Help</button></td>
         </tr>
     </tbody>
 </table>
@@ -72,4 +70,21 @@
             <button type="button" class="btn btn-primary" (click)="gethelp(name.value, course.value, problem.value, location.value, email.value)">Get Help</button>
         </form>
     </div>
+</section>
+
+<section *ngIf="helping">
+    <div>
+        <p>Help Started: <span>{{startedTime}}</span></p>
+        <p>Helped By: <span>{{helpedByName}}</span></p>
+
+        <form>
+            <div class="form-group">
+                <label for="report">Request Report</label>
+                <textarea id="report" class="form-control" #report></textarea>
+            </div>
+            <button type="button" class="btn" (click)="helpStudentExit()">Exit</button>
+            <button type="button" class="btn btn-danger" (click)="removeStudent(report.value)">Finished</button>
+        </form>
+    </div>
+
 </section>

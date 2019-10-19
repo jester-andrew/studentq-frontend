@@ -15,15 +15,19 @@ export class QueComponent implements OnInit {
   register:boolean = false;
   labOptions;
   ta:boolean = false;
+  helping: boolean = false;
+  helpingRow: any;
+  isHelping: boolean = false;
+
+  // helping Row values
+  startedTime;
+  helpedByName;
   constructor(private qservice: QueServiceService, private loginBroadcast:LoginService) { }
 
   ngOnInit() {
 
     let auth = JSON.parse(sessionStorage.getItem('auth'));
     if(auth !== null){
-      // if(auth.permissions === "Lab Assistant"){
-      //   this.ta = true;
-      // }
       localStorage.setItem('selectedLab', auth.lab);
     }
 
@@ -33,14 +37,12 @@ export class QueComponent implements OnInit {
     }
 
     this.qservice.getLabs().subscribe((result:any) => {
-      console.log(result);
       let options = '<option value="" disabled selected>Choose Lab</option>';
       for(let i = 0; i < result.labs.length; i++){
-        console.log('in loop')
         if(result.labs[i] === this.selectedLab){
-          options += '<option selected>'+result.labs[i]+'</option>'
+          options += '<option selected>'+result.labs[i].alias+'</option>'
         }else{
-          options += '<option>'+result.labs[i]+'</option>'
+          options += '<option>'+result.labs[i].alias+'</option>'
         }
       }
       this.labOptions = options;
@@ -55,19 +57,24 @@ export class QueComponent implements OnInit {
       });
     });
 
-    
-    // setInterval(() => {
-    //     this.getHelpRequests()
-    // }, 10000);
-
     this.qservice
       .getRequest()
       .subscribe((requestString: string) => {
-        console.log(requestString);
         let request = JSON.parse(requestString);
         console.log(request);
         this.studentRequests = request;
       });
+
+      this.qservice
+        .getRow()
+        .subscribe((rowString: string) =>{
+            //open the help modal
+            let row = JSON.parse(rowString);
+            this.helpingRow = row;
+            this.helpedByName = row.helperName;
+            this.startedTime = new Date(row.timeHelped).toLocaleTimeString('en-US');
+            this.helping = true;
+        }); 
   }
 
   labChange(lab:string){
@@ -101,25 +108,44 @@ export class QueComponent implements OnInit {
       question: problem,
       campus: location,
       email: email,
-      collection: this.selectedLab
+      collection: this.selectedLab,
+      timeEnteredQue: Date.now()
     }
-    this.qservice.insertRequest(request)
+    this.qservice.insertRequest(request);
+    this.register = false;
   }
 
-  helpStudent(id){
-    console.log(id);
+  helpStudent(row){
+    this.helpingRow = row;
+    this.helpedByName = row.helperName;
+    this.startedTime = new Date(row.timeHelped).toLocaleTimeString('en-US');
+
+    if(row.beingHelped != "table-success" && !this.isHelping){
+      let auth = JSON.parse(sessionStorage.getItem('auth'));
+      this.qservice.updatRequest(row._id, this.selectedLab, auth.name);
+      this.isHelping = true;
+    }else{
+      this.helping = true;
+    }
   }
 
-  removeStudent(id){
-    // for(let i=0; i < this.studentRequests.length; i++){
-    //   if(this.studentRequests[i]._id == id){
-    //       this.studentRequests.splice(i,1)
-    //   }
-    // }
-    this.qservice.deleteRequest(id, this.selectedLab)
-    // .subscribe((result) =>{
-    //   console.log(result);
-    // });
+  helpStudentExit(){
+    this.helping = false;
+  }
+
+  removeStudent(report){
+    this.helpingRow.finishedHelp = Date.now();
+    this.helpingRow.report = report;
+    this.qservice.saveHelpSession(this.helpingRow, this.selectedLab).subscribe((response:any) => {
+      if(response.saved){
+        let id = this.helpingRow._id;
+        this.qservice.deleteRequest(id, this.selectedLab);
+        this.isHelping = false;
+      }else{
+        alert("Lost connection to the server try again later");
+      }
+      this.helping = false;
+    });
   }
 }
 

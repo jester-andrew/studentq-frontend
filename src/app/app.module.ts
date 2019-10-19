@@ -9,6 +9,8 @@ import { LabInfoComponent } from './lab-info/lab-info.component';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SanitizeHTMLPipe } from './sanitize-html.pipe';
+import { LabAssistantsComponent } from './lab-assistants/lab-assistants.component';
+import { InstructorsComponent } from './instructors/instructors.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SanitizeHTMLPipe } from './sanitize-html.pipe';
     QueComponent,
     LabInfoComponent,
     LoginComponent,
-    SanitizeHTMLPipe
+    SanitizeHTMLPipe,
+    LabAssistantsComponent,
+    InstructorsComponent
   ],
   imports: [
     BrowserModule,

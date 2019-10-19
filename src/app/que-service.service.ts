@@ -12,11 +12,21 @@ export class QueServiceService {
   insertRestAPI:string = this.domain + 'enterq';
   getLabsAPI:string = this.domain + 'getLabs';
   removeAPI:string = this.domain + 'removeq';
+  updateRequestAPI:string = this.domain + 'updateRequest';
+  saveSessionAPI:string = this.domain + 'saveSession';
 
   public getRequest = () => {
     return Observable.create((observer) => {
         this.socket.on('add', (request) => {
             observer.next(request);
+        });
+    });
+  }
+
+  public getRow = () => {
+    return Observable.create((observer) => {
+        this.socket.on('helping', row => {
+          observer.next(row);
         });
     });
   }
@@ -40,11 +50,7 @@ export class QueServiceService {
     }
     request.body = innerBody;
     let body = JSON.stringify(request);
-    // let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    // let options = { headers: headers };
-    // console.log(this.socket);
     this.socket.emit('add', body);
-    //return this.http.post(this.insertRestAPI, body, options);
   }
 
   getLabs(){
@@ -61,12 +67,27 @@ export class QueServiceService {
       }
     });
 
-    // let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    // let options = { headers: headers };
-
-    //return this.http.post(this.removeAPI, body, options);
-
     this.socket.emit('remove', body);
+
+  }
+
+  updatRequest(id, collection, adminName){
+    let body = JSON.stringify({
+      id: id,
+      collection: collection,
+      name: adminName
+    });
+   this.socket.emit('update',body);
+  }
+
+  saveHelpSession(helpRequest, lab){
+    let bodyObject = {session: helpRequest, file:lab}
+    let body = JSON.stringify(bodyObject);
+
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let options = { headers: headers };
+
+    return this.http.post(this.saveSessionAPI, body, options);
 
   }
 }

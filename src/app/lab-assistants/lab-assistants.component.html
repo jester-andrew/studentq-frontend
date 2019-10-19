@@ -1,0 +1,51 @@
+<h1>Lab Assistants</h1>
+<section>
+    <button type="button">Add Lab Assistant</button>
+</section>
+
+<!-- lab assistants displayed -->
+<table class="table table-hover" id="que">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Lab</th>
+            <th scope="col">Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of studentRequests;let i = index">
+            <th scope="col">{{i+1}}</th>
+            <td scope="col">{{row.name}}</td>
+            <td scope="col">{{row.email}}</td>
+            <td scope="col">{{row.lab}}</td>
+            <td scope="col"><button class="btn btn-success" (click)="removeAssistant(row)">Remove</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- add lab assistant form -->
+<section>
+    <form>
+        <div class="form-group">
+            <label for="lab">Lab</label>
+            <select id="lab" #lab [innerHTML]="labOptions | sanitizeHTML">
+              <option>Fake option</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" #name>
+        </div>
+        <div class="form-group">
+            <label for="email">School Email</label>
+            <input type="text" id="email" class="form-control" #email>
+        </div>
+        <div class="form-group">
+            <label for="password">Temp Password</label>
+            <input type="text" id="password" class="form-control" #password>
+        </div>
+        <button type="button" (click)="addAdmin(lab, name, email, password)">Add</button>
+    </form>
+</section>
