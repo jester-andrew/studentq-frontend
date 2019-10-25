@@ -9,6 +9,8 @@ import { QueServiceService } from '../que-service.service';
 })
 export class LabAssistantsComponent implements OnInit {
   labOptions:any;
+  group:string = "Lab Assistant";
+  admins:any;
   constructor(private adminService: AdminService, private qservice: QueServiceService) { }
 
   ngOnInit() {
@@ -19,14 +21,19 @@ export class LabAssistantsComponent implements OnInit {
       }
       this.labOptions = options;
     });
+
+    this.adminService.getAdmins(this.group).subscribe((result:any) => {
+      console.log(result);
+      this.admins = result.admins;
+    }); 
   }
 
   addAdmin(lab, name, email, password){
     let admin = {
-      lab:lab,
-      name: name,
-      email: email,
-      password: password,
+      lab:lab.value,
+      name: name.value,
+      email: email.value,
+      password: password.value,
       permissions: "Lab Assistant"
     }
 

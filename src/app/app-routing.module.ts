@@ -6,6 +6,7 @@ import { LabInfoComponent } from './lab-info/lab-info.component';
 import { LoginComponent } from './login/login.component';
 import { LabAssistantsComponent } from './lab-assistants/lab-assistants.component';
 import { InstructorsComponent } from './instructors/instructors.component';
+import { CoursesComponent } from './courses/courses.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'labInfo', component: LabInfoComponent},
   {path: 'login', component: LoginComponent},
   {path: 'labAssistants', component: LabAssistantsComponent},
-  {path: 'instructors', component: InstructorsComponent}
+  {path: 'instructors', component: InstructorsComponent},
+  {path: 'courses', component: CoursesComponent}
 ];
 
 @NgModule({
@@ -27,5 +29,6 @@ export const routingComponents = [
   LabInfoComponent, 
   LoginComponent, 
   LabAssistantsComponent, 
-  InstructorsComponent
+  InstructorsComponent,
+  CoursesComponent
 ];

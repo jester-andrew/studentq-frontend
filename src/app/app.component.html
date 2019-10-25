@@ -21,7 +21,7 @@
                     <a class="dropdown-item" href="#" *ngIf="permissionPro || permissionAdm">Reports</a>
                     <a class="dropdown-item" routerLink="labAssistants" *ngIf="permissionPro || permissionAdm">Lab Assistant</a>
                     <a class="dropdown-item" routerLink="instructors" *ngIf="permissionPro || permissionAdm">Instructors</a>
-                    <a class="dropdown-item" href="#" *ngIf="permissionPro || permissionAdm">Courses</a>
+                    <a class="dropdown-item" routerLink="courses" *ngIf="permissionPro || permissionAdm">Courses</a>
                     <a class="dropdown-item" href="#" *ngIf="permissionLA || permissionPro || permissionAdm">Availability</a>
                     <a class="dropdown-item" href="#" *ngIf="permissionAdm">Labs</a>
                 </div>

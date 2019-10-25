@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SanitizeHTMLPipe } from './sanitize-html.pipe';
 import { LabAssistantsComponent } from './lab-assistants/lab-assistants.component';
 import { InstructorsComponent } from './instructors/instructors.component';
+import { CoursesComponent } from './courses/courses.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InstructorsComponent } from './instructors/instructors.component';
     LoginComponent,
     SanitizeHTMLPipe,
     LabAssistantsComponent,
-    InstructorsComponent
+    InstructorsComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,

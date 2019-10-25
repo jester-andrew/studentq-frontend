@@ -8,6 +8,7 @@ export class AdminService {
   private domain:string = 'http://localhost:5000/' /*|| 'https://vast-mesa-84900.herokuapp.com/'*/; 
   private addAdminAPI:string = this.domain + 'addAdmin';
   private deleteAdminAPI:string = this.domain + 'deleteAdmin';
+  private getAdminAPI:string = this.domain + 'getAdmin';
 
   constructor(private http: HttpClient) { }
 
@@ -25,5 +26,13 @@ export class AdminService {
     let options = { headers: headers };
 
     return this.http.post(this.deleteAdminAPI, body, options);
+  }
+
+  getAdmins(group){
+    let body = JSON.stringify({group:group});
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let options = { headers: headers };
+
+    return this.http.post(this.getAdminAPI, body, options);
   }
 }
