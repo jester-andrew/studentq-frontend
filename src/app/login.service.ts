@@ -10,7 +10,9 @@ export class LoginService {
   private domain:string = 'http://localhost:5000/' /*|| 'https://vast-mesa-84900.herokuapp.com/'*/; 
   private loginAPI:string = this.domain + 'login';
   private appPermissions:BehaviorSubject<String> = new BehaviorSubject<String>('{loggedin: false,permissionsLA:false,permissionPro:false,permissionAdm:false}');
+  private taPermission:BehaviorSubject<String> = new BehaviorSubject<String>('{ta: false}');
   brodcast = this.appPermissions.asObservable();
+  broadcastTA = this.taPermission.asObservable();
 
   constructor(private http: HttpClient) { 
     
@@ -26,6 +28,10 @@ export class LoginService {
 
   editPermissions(newPermissions){
     this.appPermissions.next(newPermissions);
+  }
+
+  tapermission(newPermision){
+    this.taPermission.next(newPermision);
   }
 
 }

@@ -45,9 +45,7 @@
                 <label for="class">Class</label>
                 <select id="class" #course>
                   <option value="" disabled>Pick course</option>
-                  <option>CIT 160</option>
-                  <option>CIT 230</option>
-                  <option>CIT 336</option>
+                  <option *ngFor="let row of courses">{{row.name}}</option>
                 </select>
             </div>
             <div class="form-group">

@@ -23,6 +23,23 @@ export class AppComponent implements OnInit {
         this.permissionPro = permissions.permissionPro;
         this.permissionAdm = permissions.permissionAdm;
     });
+
+    let auth = JSON.parse(sessionStorage.getItem('auth'));
+
+    if(auth != null){
+      this.loggedin = true;
+      let permissions = auth.permissions;
+
+      this.loginBroadcast.tapermission({ta: true});
+      
+      if(permissions == 'Lab Assistant'){
+        this.permissionLA = true;
+      }else if(permissions == 'Professor'){
+        this.permissionPro = true;
+      }else{
+        this.permissionPro = true;
+      }
+    }
   }
 
 

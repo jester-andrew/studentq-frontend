@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QueServiceService } from '../que-service.service';
 import{ LoginService } from '../login.service';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-que',
@@ -18,11 +19,14 @@ export class QueComponent implements OnInit {
   helping: boolean = false;
   helpingRow: any;
   isHelping: boolean = false;
+  helpingID:number;
 
   // helping Row values
   startedTime;
   helpedByName;
-  constructor(private qservice: QueServiceService, private loginBroadcast:LoginService) { }
+
+  courses;
+  constructor(private qservice: QueServiceService, private loginBroadcast:LoginService, private courseService: CourseService) { }
 
   ngOnInit() {
 
@@ -48,12 +52,11 @@ export class QueComponent implements OnInit {
       this.labOptions = options;
       
       this.loginBroadcast.brodcast.subscribe((permissions:any) =>{
-        if(permissions.permissionsLA || permissions.permissionsPro || permissions.permissionsAdm){
+        if(auth != null){
           this.ta = true;
         }else{
           this.ta = false;
         }
-        
       });
     });
 
@@ -65,16 +68,27 @@ export class QueComponent implements OnInit {
         this.studentRequests = request;
       });
 
-      this.qservice
-        .getRow()
-        .subscribe((rowString: string) =>{
-            //open the help modal
-            let row = JSON.parse(rowString);
-            this.helpingRow = row;
-            this.helpedByName = row.helperName;
-            this.startedTime = new Date(row.timeHelped).toLocaleTimeString('en-US');
-            this.helping = true;
-        }); 
+    this.qservice
+      .getRow()
+      .subscribe((requestString: string) =>{
+          let request = JSON.parse(requestString);
+          console.log(request);
+          this.studentRequests = request;
+          //open the help modal
+        
+          for(let i = 0; i < this.studentRequests.length; i++){
+            if(this.studentRequests[i]._id == this.helpingID){
+              this.helpingRow = this.studentRequests[i];
+              console.log(this.studentRequests[i]);
+            }
+          }
+
+          this.helpedByName = this.helpingRow.helperName;
+          this.startedTime = new Date(this.helpingRow.timeHelped).toLocaleTimeString('en-US');
+          this.helping = true;
+      }); 
+
+      this.getCourses();
   }
 
   labChange(lab:string){
@@ -82,7 +96,7 @@ export class QueComponent implements OnInit {
     localStorage.setItem('selectedLab', lab);
     this.selectedLab = lab;
     this.getHelpRequests();
-    
+    this.getCourses();
   }
 
   getHelpRequests(){
@@ -90,6 +104,12 @@ export class QueComponent implements OnInit {
         if(result['returnrd']){
           this.studentRequests = result['result'];
         }
+    });
+  }
+
+  getCourses(){
+    this.courseService.getlabCourses(this.selectedLab).subscribe((result:any) => {
+      this.courses = result.courses;
     });
   }
 
@@ -116,15 +136,16 @@ export class QueComponent implements OnInit {
   }
 
   helpStudent(row){
-    this.helpingRow = row;
-    this.helpedByName = row.helperName;
-    this.startedTime = new Date(row.timeHelped).toLocaleTimeString('en-US');
 
     if(row.beingHelped != "table-success" && !this.isHelping){
       let auth = JSON.parse(sessionStorage.getItem('auth'));
       this.qservice.updatRequest(row._id, this.selectedLab, auth.name);
+      this.helpingID = row._id;
       this.isHelping = true;
     }else{
+      this.helpingRow = row;
+      this.helpedByName = row.helperName;
+      this.startedTime = new Date(row.timeHelped).toLocaleTimeString('en-US');
       this.helping = true;
     }
   }
