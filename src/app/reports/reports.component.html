@@ -1,0 +1,50 @@
+<label for="reports">Choose Report</label>
+<select id="reports" (change)="changeReportView(reportOption.value)" #reportOption>
+  <option selected value="1">Questions/Reports</option>
+  <option  value="2">Lab Times</option>
+  <option  value="3">Lab Numbers</option>
+</select>
+
+<p *ngIf="err" class="alert-primary">{{errMessage}}</p>
+
+<!-- Questions/Report -->
+<section *ngIf="questionReport">
+    <label for="scope">Time Scope</label>
+    <select id="scope" (change)="changeReportView()">
+    <option selected value="1">Weekly</option>
+    <option  value="2">Monthly</option>
+  </select>
+
+    <label for="course">Course Scope</label>
+    <select id="course" (change)="changecourse()">
+    <option selected >All</option>
+    <option *ngFor="let row of courses">{{row.name}}</option>
+  </select>
+
+    <table class="table table-hover" id="que">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Question</th>
+                <th scope="col">Report</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of qrReports;let i = index">
+                <th scope="col">{{i+1}}</th>
+                <td scope="col">{{row.question}}</td>
+                <td scope="col">{{row.report}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>
+<!-- Times -->
+<section *ngIf="times">
+
+</section>
+
+<!-- Numbers Helped -->
+<section *ngIf="numbers">
+
+</section>

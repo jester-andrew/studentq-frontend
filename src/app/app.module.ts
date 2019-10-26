@@ -12,6 +12,7 @@ import { SanitizeHTMLPipe } from './sanitize-html.pipe';
 import { LabAssistantsComponent } from './lab-assistants/lab-assistants.component';
 import { InstructorsComponent } from './instructors/instructors.component';
 import { CoursesComponent } from './courses/courses.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CoursesComponent } from './courses/courses.component';
     SanitizeHTMLPipe,
     LabAssistantsComponent,
     InstructorsComponent,
-    CoursesComponent
+    CoursesComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
