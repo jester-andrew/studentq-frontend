@@ -9,14 +9,15 @@
 
 <!-- Questions/Report -->
 <section *ngIf="questionReport">
+    <h1>Questions/Reports</h1>
     <label for="scope">Time Scope</label>
-    <select id="scope" (change)="changeReportView()">
+    <select id="scope" (change)="changeReportScope(timeScope.value)" #timeScope>
     <option selected value="1">Weekly</option>
     <option  value="2">Monthly</option>
   </select>
 
     <label for="course">Course Scope</label>
-    <select id="course" (change)="changecourse()">
+    <select id="course" (change)="changeCourse(course.value)" #course>
     <option selected >All</option>
     <option *ngFor="let row of courses">{{row.name}}</option>
   </select>
@@ -39,12 +40,71 @@
     </table>
 
 </section>
+
 <!-- Times -->
 <section *ngIf="times">
+    <h1>Lab Times</h1>
+    <label for="scope">Time Scope</label>
+    <select id="scope" (change)="changeTimeScope(timeScope.value)" #timeScope>
+    <option selected value="1">Weekly</option>
+    <option  value="2">Monthly</option>
+    <option  value="3">Semester</option>
+  </select>
 
+    <label for="course">Course Scope</label>
+    <select id="course" (change)="changeTimeCourse(course.value)" #course>
+    <option selected >All</option>
+    <option *ngFor="let row of courses">{{row.name}}</option>
+  </select>
+    <table class="table table-hover" id="que">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Average</th>
+                <th scope="col">Longest</th>
+                <th scope="col">Shortest</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="col">Wait Time</th>
+                <td scope="col">{{wAvg.hour}} : {{wAvg.min}} : {{wAvg.sec}}</td>
+                <td scope="col">{{wLong.hour}} : {{wLong.min}} : {{wLong.sec}}</td>
+                <td scope="col">{{wShort.hour}} : {{wShort.min}} : {{wShort.sec}}</td>
+            </tr>
+            <tr>
+
+                <th scope="col">Help Time</th>
+                <td scope="col">{{hAvg.hour}} : {{hAvg.min}} : {{hAvg.sec}}</td>
+                <td scope="col">{{hLong.hour}} : {{hLong.min}} : {{hLong.sec}}</td>
+                <td scope="col">{{hShort.hour}} : {{hShort.min}} : {{hShort.sec}}</td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
 <!-- Numbers Helped -->
 <section *ngIf="numbers">
+    <h1>Lab Numbers</h1>
+    <table class="table table-hover" id="que">
+        <thead>
+            <tr>
+                <th scope="col">Students Helped:</th>
+                <th scope="col">Today</th>
+                <th scope="col">This Week</th>
+                <th scope="col">This Month</th>
+                <th scope="col">This Semester</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="col"></th>
+                <td scope="col">{{helpToday}}</td>
+                <td scope="col">{{helpWeek}}</td>
+                <td scope="col">{{helpMonth}}</td>
+                <td scope="col">{{helpSemester}}</td>
+            </tr>
+        </tbody>
+    </table>
 
 </section>
