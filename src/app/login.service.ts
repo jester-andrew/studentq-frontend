@@ -34,4 +34,26 @@ export class LoginService {
     this.taPermission.next(newPermision);
   }
 
+  isLoggedin(){
+    return (sessionStorage.getItem('auth') != null);
+  }
+
+  isInstructor(){
+    if(this.isLoggedin()){
+      let auth = JSON.parse(sessionStorage.getItem('auth'));
+      return auth.permissions == "Professor";
+    }else{
+      return false;
+    }
+  }
+
+  getAuthorizedLab(){
+    if(this.isLoggedin()){
+      let auth = JSON.parse(sessionStorage.getItem('auth'));
+      return auth.lab;
+    }else{
+      return null;
+    }
+  }
+
 }

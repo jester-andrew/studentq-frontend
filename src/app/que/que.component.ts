@@ -29,21 +29,25 @@ export class QueComponent implements OnInit {
   constructor(private qservice: QueServiceService, private loginBroadcast:LoginService, private courseService: CourseService) { }
 
   ngOnInit() {
-
+    //get authed lab
     let auth = JSON.parse(sessionStorage.getItem('auth'));
     if(auth !== null){
       localStorage.setItem('selectedLab', auth.lab);
     }
 
+    //setting selected lab
     this.selectedLab = localStorage.getItem('selectedLab');
     if(this.selectedLab != null){
       this.getHelpRequests();
     }
 
+    //getting all lab values for dropdown
     this.qservice.getLabs().subscribe((result:any) => {
       let options = '<option value="" disabled selected>Choose Lab</option>';
       for(let i = 0; i < result.labs.length; i++){
-        if(result.labs[i] === this.selectedLab){
+        console.log(result.labs[i].alias);
+        console.log(this.selectedLab);
+        if(result.labs[i].alias === this.selectedLab){
           options += '<option selected>'+result.labs[i].alias+'</option>'
         }else{
           options += '<option>'+result.labs[i].alias+'</option>'
