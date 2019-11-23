@@ -11,6 +11,7 @@ export class InstructorsComponent implements OnInit {
   labOptions:any;
   group:any = "Professor";
   admins:any;
+  modal:boolean = false;
   constructor(private adminService: AdminService, private qservice: QueServiceService) { }
 
   ngOnInit() {
@@ -38,13 +39,21 @@ export class InstructorsComponent implements OnInit {
     }
 
     this.adminService.addAdmin(admin).subscribe((result) => {
-      console.log(result);
+      location.reload();
     });
   }
 
   removeInstructor(id){
     this.adminService.removeAdmin(id).subscribe((result) => {
-      console.log(result);
+      location.reload();
     });
+  }
+
+  openModal(){
+    this.modal = true;
+  }
+
+  exitModal(){
+    this.modal = false;
   }
 }

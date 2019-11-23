@@ -10,6 +10,8 @@ import { QueServiceService } from '../que-service.service';
 export class CoursesComponent implements OnInit {
   courses: any;
   labOptions;
+  modal:boolean = false;
+
   constructor(private courseService: CourseService, private qservice:QueServiceService) { }
 
   ngOnInit() {
@@ -31,15 +33,22 @@ export class CoursesComponent implements OnInit {
     let course = {lab, name};
     this.courseService.addCourse(course).subscribe((result) => {
       //add to list
-      console.log(result)
+      location.reload();
     });
   }
 
   deleteCourse(id){
     this.courseService.deleteCourse(id).subscribe(result => {
       //remove from list
-      console.log(result);
+      location.reload();
     });
   }
 
+  openModal(){
+    this.modal = true;
+  }
+
+  exitModal(){
+    this.modal = false;
+  }
 }

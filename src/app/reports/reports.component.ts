@@ -25,9 +25,9 @@ export class ReportsComponent implements OnInit {
   courses:any;
 
   //filters
-  week:boolean;
-  month:boolean;
-  courseValue:string;
+  week:boolean = true;
+  month:boolean = false;
+  courseValue:string = 'week';
 
   timeScope:string = 'week';
   timeCourse:string;
@@ -140,7 +140,7 @@ export class ReportsComponent implements OnInit {
     //calcumate max times 
     this.wLong =  this.caluclateHourMinSec(Math.max(...waitTimes));
     this.hLong =  this.caluclateHourMinSec(Math.max(...helpTimes));
-    
+
     //calulate min times
     this.wShort =  this.caluclateHourMinSec(Math.min(...waitTimes));
     this.hShort =  this.caluclateHourMinSec(Math.min(...helpTimes));
@@ -148,7 +148,23 @@ export class ReportsComponent implements OnInit {
     //calculate average times
     this.wAvg = this.caluclateHourMinSec(this.calculateAVG(waitTimes));
     this.hAvg = this.caluclateHourMinSec(this.calculateAVG(helpTimes));
+    
 
+  }
+
+  checkInvalidValue(value){
+    console.log(value.sec);
+    if(Object.is(value.sec, NaN) || value.sec == Infinity || value.sec == -Infinity){
+      value.sec = 'No Data';
+    }
+    if(Object.is(value.min, NaN) || value.min == Infinity || value.min == -Infinity){
+      value.min = '';
+    }
+    if(Object.is(value.hour, NaN) || value.hour == Infinity || value.hour == -Infinity){
+      value.hour = '';
+    }
+    console.log(value);
+    return value;
   }
 
   caluclateHourMinSec(timeMS){
@@ -166,6 +182,8 @@ export class ReportsComponent implements OnInit {
       min: min, 
       sec: sec
     }
+    time = this.checkInvalidValue(time);
+    
 
     return time;
   }

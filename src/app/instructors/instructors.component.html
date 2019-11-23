@@ -1,6 +1,6 @@
 <h1>Instructors</h1>
 <section>
-    <button type="button">Add Lab Assistant</button>
+    <button type="button" class="btn btn-primary" (click)="openModal()">Add Instructor</button>
 </section>
 
 <!-- instructors displayed -->
@@ -26,7 +26,7 @@
 </table>
 
 <!-- add instructor form -->
-<section>
+<section *ngIf="modal">
     <form>
         <div class="form-group">
             <label for="lab">Lab</label>
@@ -46,6 +46,7 @@
             <label for="password">Temp Password</label>
             <input type="text" id="password" class="form-control" #password>
         </div>
-        <button type="button" (click)="addAdmin(lab, name, email, password)">Add</button>
+        <button type="button" class="btn btn-danger" (click)="exitModal()">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="addAdmin(lab, name, email, password)">Add</button>
     </form>
 </section>

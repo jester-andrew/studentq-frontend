@@ -150,7 +150,12 @@ export class QueComponent implements OnInit {
       this.helpingRow = row;
       this.helpedByName = row.helperName;
       this.startedTime = new Date(row.timeHelped).toLocaleTimeString('en-US');
-      this.helping = true;
+      
+      if(this.startedTime == 'Invalid Date'){
+        this.helping = false;
+      }else{
+        this.helping = true;
+      }
     }
   }
 

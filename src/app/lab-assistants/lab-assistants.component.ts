@@ -11,6 +11,8 @@ export class LabAssistantsComponent implements OnInit {
   labOptions:any;
   group:string = "Lab Assistant";
   admins:any;
+  modal:boolean = false;
+
   constructor(private adminService: AdminService, private qservice: QueServiceService) { }
 
   ngOnInit() {
@@ -38,14 +40,24 @@ export class LabAssistantsComponent implements OnInit {
     }
 
     this.adminService.addAdmin(admin).subscribe((result) => {
-      console.log(result);
+      location.reload();
     });
   }
 
   removeAssistant(id){
     this.adminService.removeAdmin(id).subscribe((result) => {
-      console.log(result);
+      location.reload();
     });
+  }
+
+  openModal(){
+    this.modal = true;
+    console.log('being called');
+    
+  }
+
+  exitModal(){
+    this.modal = false;
   }
 
 }
