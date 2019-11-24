@@ -1,0 +1,20 @@
+.container {
+    width: 30%;
+    margin-left: auto;
+    margin-left: auto;
+    background-color: white;
+    padding: 1em;
+}
+
+.container textarea {
+    height: 75px;
+}
+
+.modal-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 5em;
+    padding-bottom: 20em;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

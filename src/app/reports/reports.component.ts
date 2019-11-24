@@ -27,7 +27,7 @@ export class ReportsComponent implements OnInit {
   //filters
   week:boolean = true;
   month:boolean = false;
-  courseValue:string = 'week';
+  courseValue:string = null;
 
   timeScope:string = 'week';
   timeCourse:string;
@@ -70,8 +70,6 @@ export class ReportsComponent implements OnInit {
   }
 
   changeReportScope(option){
-    console.log('called');
-    console.log(option);
     if(option == 1){
       this.week = true;
       this.month = false;
@@ -113,7 +111,6 @@ export class ReportsComponent implements OnInit {
   }
 
   changeReportView(reportOption){
-    console.log(reportOption);
     if(reportOption == 1){ //question/report
       this.questionReport = true;
       this.times = false;
@@ -153,7 +150,6 @@ export class ReportsComponent implements OnInit {
   }
 
   checkInvalidValue(value){
-    console.log(value.sec);
     if(Object.is(value.sec, NaN) || value.sec == Infinity || value.sec == -Infinity){
       value.sec = 'No Data';
     }
@@ -226,8 +222,6 @@ export class ReportsComponent implements OnInit {
     //remove NaN values if a date isn't stored correctly
     waitTimes = waitTimes.filter(value => value);
     helpTimes = helpTimes.filter(value => value);
-    console.log(waitTimes);
-    console.log(helpTimes);
     return {wait: waitTimes, help: helpTimes};
   }
 

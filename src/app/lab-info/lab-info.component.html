@@ -20,49 +20,57 @@
 </table>
 
 <!-- editing modal -->
-<section *ngIf="isEditing">
-    <div *ngIf="iserr">{{errMessage}}</div>
-    <div id="modal-container">
-        <h2>{{labName}}</h2>
-        <label for="room">Room #</label><br>
-        <input type="text" value="{{labRoom}}" class="room" id="room" #room><br><br>
+<section *ngIf="isEditing" class="modal-container">
+    <div class="container">
+        <div *ngIf="iserr">{{errMessage}}</div>
+        <div id="modal-container">
+            <h2>{{labName}}</h2>
+            <div class="form-group">
+                <label for="room">Room #</label><br>
+                <input type="text" value="{{labRoom}}" class="room" id="room" #room class="form-control"><br><br>
+            </div>
+            <label style="font-weight:bold">Monday</label> <button type="button" (click)="addTime('mon')" class="btn btn-success">Add Time</button><br>
+            <div *ngFor="let monTime of mon;let i = index" class="form-group" style="display: flex;">
+                <input type="text" class="mon" value="{{monTime}}" class="form-control">
+                <button (click)="removeTime(mon, i)" class="btn btn-danger">Remove</button>
+            </div><br>
 
-        <label style="font-weight:bold">Monday</label> <button type="button" (click)="addTime('mon')">Add Time</button><br>
-        <div *ngFor="let monTime of mon;let i = index">
-            <input type="text" class="mon" value="{{monTime}}"><button (click)="removeTime(mon, i)">Remove</button>
-        </div><br>
+            <label style="font-weight:bold">Tuesday</label> <button type="button" (click)="addTime('tues')" class="btn btn-success">Add Time</button><br>
+            <div *ngFor="let tuTime of tues;let i = index" class="form-group" style="display: flex;">
+                <input type="text" class="tues" value="{{tuTime}}" class="form-control">
+                <button (click)="removeTime(tues, i)" class="btn btn-danger">Remove</button>
+            </div><br>
 
-        <label style="font-weight:bold">Tuesday</label> <button type="button" (click)="addTime('tues')">Add Time</button><br>
-        <div *ngFor="let tuTime of tues;let i = index">
-            <input type="text" class="tues" value="{{tuTime}}"><button (click)="removeTime(tues, i)">Remove</button>
-        </div><br>
+            <label style="font-weight:bold">Wednesday</label> <button type="button" (click)="addTime('wed')" class="btn btn-success">Add Time</button><br>
+            <div *ngFor="let wedTime of wed;let i = index" class="form-group" style="display: flex;">
+                <input type="text" class="wed" value="{{wedTime}}" class="form-control">
+                <button (click)="removeTime(wed, i)" class="btn btn-danger">Remove</button>
+            </div><br>
 
-        <label style="font-weight:bold">Wednesday</label> <button type="button" (click)="addTime('wed')">Add Time</button><br>
-        <div *ngFor="let wedTime of wed;let i = index">
-            <input type="text" class="wed" value="{{wedTime}}"><button (click)="removeTime(wed, i)">Remove</button>
-        </div><br>
+            <label style="font-weight:bold">Thursday</label> <button type="button" (click)="addTime('thurs')" class="btn btn-success">Add Time</button><br>
+            <div *ngFor="let thurTime of thurs;let i = index" class="form-group" style="display: flex;">
+                <input type="text" class="thurs" value="{{thurTime}}" class="form-control">
+                <button (click)="removeTime(thurs, i)" class="btn btn-danger">Remove</button>
+            </div><br>
 
-        <label style="font-weight:bold">Thursday</label> <button type="button" (click)="addTime('thurs')">Add Time</button><br>
-        <div *ngFor="let thurTime of thurs;let i = index">
-            <input type="text" class="thurs" value="{{thurTime}}"><button (click)="removeTime(thurs, i)">Remove</button>
-        </div><br>
+            <label style="font-weight:bold">Friday</label> <button type="button" (click)="addTime('fri')" class="btn btn-success">Add Time</button><br>
+            <div *ngFor="let friTime of fri;let i = index" class="form-group" style="display: flex;">
+                <input type="text" class="fri" value="{{friTime}}" class="form-control">
+                <button (click)="removeTime(fri, i)" class="btn btn-danger">Remove</button>
+            </div><br>
 
-        <label style="font-weight:bold">Friday</label> <button type="button" (click)="addTime('fri')">Add Time</button><br>
-        <div *ngFor="let friTime of fri;let i = index">
-            <input type="text" class="fri" value="{{friTime}}"><button (click)="removeTime(fri, i)">Remove</button>
-        </div><br>
+            <label style="font-weight:bold">Saturday</label> <button type="button" (click)="addTime('sat')" class="btn btn-success">Add Time</button><br>
+            <div *ngFor="let satTime of sat;let i = index" class="form-group" style="display: flex;">
+                <input type="text" class="sat" value="{{satTime}}" class="form-control">
+                <button (click)="removeTime(sat, i)" class="btn btn-danger">Remove</button>
+            </div><br>
 
-        <label style="font-weight:bold">Saturday</label> <button type="button" (click)="addTime('sat')">Add Time</button><br>
-        <div *ngFor="let satTime of sat;let i = index">
-            <input type="text" class="sat" value="{{satTime}}"><button (click)="removeTime(sat, i)">Remove</button>
-        </div><br>
-
-        <div class="container">
-            <div class="row" style="justify-content: flex-end;">
-                <button type="button" (click)="cancelUpdate()" class="btn btn-danger">Cancel</button>
-                <button type="button" (click)="updateLabInfo(labName)" class="btn btn-success">Update</button>
+            <div class="container">
+                <div class="row" style="justify-content: flex-end;">
+                    <button type="button" (click)="cancelUpdate()" class="btn btn-danger">Cancel</button>
+                    <button type="button" (click)="updateLabInfo(labName)" class="btn btn-success">Update</button>
+                </div>
             </div>
         </div>
     </div>
-
 </section>
