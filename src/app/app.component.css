@@ -31,7 +31,9 @@
 }
 
 #main-header {
-    background-color: rgb(0, 123, 255);
+    /* background-color: rgb(0, 123, 255); */
+    background-color: #007bff;
+    border-color: #007bff;
     padding: .25em;
 }
 

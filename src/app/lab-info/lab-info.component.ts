@@ -136,6 +136,9 @@ export class LabInfoComponent implements OnInit {
     let newFridayTimeELem = this.elRef.nativeElement.querySelectorAll('.fri');
     let newSaturdayTimeELem = this.elRef.nativeElement.querySelectorAll('.sat');
 
+    console.log(this.elRef.nativeElement.querySelectorAll('.mon'));
+    
+
     let times = [];
     let mon = [];
     let tues = [];

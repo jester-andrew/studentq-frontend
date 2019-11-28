@@ -1,10 +1,12 @@
-<h1>Instructors</h1>
+<br>
+<h1 style="text-align: center;">Instructors</h1>
+<br>
 <section>
-    <button type="button" class="btn btn-primary" (click)="openModal()">Add Instructor</button>
-</section>
+    <button type="button" class="btn btn-primary" (click)="openModal()" style="margin-left: 1em;">Add Instructor</button>
+</section><br>
 
 <!-- instructors displayed -->
-<table class="table table-hover" id="que">
+<table class="table table-hover" id="que" style="width: 98%; margin: auto;">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -26,27 +28,31 @@
 </table>
 
 <!-- add instructor form -->
-<section *ngIf="modal">
-    <form>
-        <div class="form-group">
-            <label for="lab">Lab</label>
-            <select id="lab" #lab [innerHTML]="labOptions | sanitizeHTML">
+<section *ngIf="modal" class="modal-container">
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="lab">Lab</label>
+                <select id="lab" #lab [innerHTML]="labOptions | sanitizeHTML" class="form-control">
               <option>Fake option</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" class="form-control" #name>
-        </div>
-        <div class="form-group">
-            <label for="email">School Email</label>
-            <input type="text" id="email" class="form-control" #email>
-        </div>
-        <div class="form-group">
-            <label for="password">Temp Password</label>
-            <input type="text" id="password" class="form-control" #password>
-        </div>
-        <button type="button" class="btn btn-danger" (click)="exitModal()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="addAdmin(lab, name, email, password)">Add</button>
-    </form>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" #name>
+            </div>
+            <div class="form-group">
+                <label for="email">School Email</label>
+                <input type="text" id="email" class="form-control" #email>
+            </div>
+            <div class="form-group">
+                <label for="password">Temp Password</label>
+                <input type="text" id="password" class="form-control" #password>
+            </div>
+            <div class="buttons">
+                <button type="button" class="btn btn-danger" (click)="exitModal()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="addAdmin(lab, name, email, password)" style="margin-left: 1em;">Add</button>
+            </div>
+        </form>
+    </div>
 </section>

@@ -3,6 +3,9 @@
         <div class="alert alert-danger">
             *Login is only for Instructors and Lab Assistants.
         </div>
+        <div class="alert alert-danger" *ngIf="ismessage">
+            {{message}}
+        </div>
         <div class="form-group">
             <label for="email"><span class="red">*</span>Email:</label>
             <input id="email" type="text" class="form-control" placeholder="Enter email" #email>

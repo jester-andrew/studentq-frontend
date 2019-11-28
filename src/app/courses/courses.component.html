@@ -1,10 +1,12 @@
-<h1>Courses</h1>
+<br>
+<h1 style="text-align: center;">Courses</h1>
+<br>
 <section>
-    <button type="button" class="btn btn-primary" (click)="openModal()">Add Course</button>
+    <button type="button" class="btn btn-primary" (click)="openModal()" style="margin-left: 1em;">Add Course</button>
 </section>
-
+<br>
 <!-- courses displayed -->
-<table class="table table-hover" id="que">
+<table class="table table-hover" id="que" style="width: 98%; margin: auto;">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -24,19 +26,23 @@
 </table>
 
 <!-- add course form -->
-<section *ngIf="modal">
-    <form>
-        <div class="form-group">
-            <label for="lab">Lab</label>
-            <select id="lab" #lab [innerHTML]="labOptions | sanitizeHTML">
-            <option>Fake option</option>
-          </select>
-        </div>
-        <div class="form-group">
-            <label for="name">Course Name (code CIT 160)</label>
-            <input type="text" id="name" class="form-control" #name>
-        </div>
-        <button type="button" class="btn btn-danger" (click)="exitModal()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="addCourse(lab.value, name.value)">Add</button>
-    </form>
+<section *ngIf="modal" class="modal-container">
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="lab">Lab</label>
+                <select id="lab" #lab [innerHTML]="labOptions | sanitizeHTML" class="form-control">
+                    <option>Fake option</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Course Name (code CIT 160)</label>
+                <input type="text" id="name" class="form-control" #name>
+            </div>
+            <div class="buttons">
+                <button type="button" class="btn btn-danger" (click)="exitModal()">Cancel</button>
+                <button type="button" class="btn btn-success" (click)="addCourse(lab.value, name.value)" style="margin-left: 1em;">Add</button>
+            </div>
+        </form>
+    </div>
 </section>
