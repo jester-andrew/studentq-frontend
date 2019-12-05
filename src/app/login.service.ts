@@ -7,7 +7,7 @@ import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
   providedIn: 'root'
 })
 export class LoginService {
-  private domain:string = 'http://localhost:5000/' /*|| 'https://vast-mesa-84900.herokuapp.com/'*/; 
+  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
   private loginAPI:string = this.domain + 'login';
   private appPermissions:BehaviorSubject<String> = new BehaviorSubject<String>('{loggedin: false,permissionsLA:false,permissionPro:false,permissionAdm:false}');
   private taPermission:BehaviorSubject<String> = new BehaviorSubject<String>('{ta: false}');

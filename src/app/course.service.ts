@@ -6,7 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CourseService {
-  private domain:string = 'http://localhost:5000/' /*|| 'https://vast-mesa-84900.herokuapp.com/'*/; 
+  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
   private getCoursesAPI:string = this.domain + 'getCourses';
   private addCourseAPI:string = this.domain + 'addCourse';
   private deleteCourseAPI:string = this.domain + 'deleteCourse';

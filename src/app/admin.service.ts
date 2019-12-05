@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AdminService {
-  private domain:string = 'http://localhost:5000/' /*|| 'https://vast-mesa-84900.herokuapp.com/'*/; 
+  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
   private addAdminAPI:string = this.domain + 'addAdmin';
   private deleteAdminAPI:string = this.domain + 'deleteAdmin';
   private getAdminAPI:string = this.domain + 'getAdmin';
