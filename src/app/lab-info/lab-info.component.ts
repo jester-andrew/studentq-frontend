@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { LabInfoService } from '../lab-info.service';
-import { Timeouts } from 'selenium-webdriver';
 import { LoginService } from '../login.service';
 
 @Component({
