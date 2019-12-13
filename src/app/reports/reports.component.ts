@@ -51,7 +51,6 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     this.report.getBulkReport().subscribe((response:any) => {
-      console.log(response);
       if(response.success){
         this.bulkReport = response.response;
         this.qrReports = this.bulkReport.week.sessions;
@@ -65,7 +64,6 @@ export class ReportsComponent implements OnInit {
     let auth = JSON.parse(sessionStorage.getItem('auth'));
     this.courseService.getlabCourses(auth.lab).subscribe((result:any) => {
       this.courses = result.courses;
-      console.log(this.courses);
     });
   }
 
@@ -166,16 +164,13 @@ export class ReportsComponent implements OnInit {
       value.hour = '0'+value.hour;
     }
 
-    console.log(value);
     return value;
   }
 
   caluclateHourMinSec(timeMS){
     let hour = Math.floor(timeMS / 1000 / 60 / 60);
     let hourMS = hour * 1000 * 60 * 60
-    console.log(hourMS);
     let min = Math.floor((timeMS - hourMS) / 1000 / 60);
-    console.log((timeMS - hourMS)/1000/60);
     let minMS = min * 1000 * 60;
     let sec = Math.floor((timeMS - (hourMS + minMS)) / 1000 );
 
@@ -223,8 +218,6 @@ export class ReportsComponent implements OnInit {
   
       waitTimes.push(waitTimeMS);
       helpTimes.push(helptimeMS);
-
-      
     }
     //remove NaN values if a date isn't stored correctly
     waitTimes = waitTimes.filter(value => value);
@@ -248,7 +241,6 @@ export class ReportsComponent implements OnInit {
     if(course == 'All'){
       this.timeCourse = null;
     }else{
-      console.log(course);
       this.timeCourse = course;
     }
     this.calculateTimes();

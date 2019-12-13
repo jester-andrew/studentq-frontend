@@ -71,10 +71,11 @@ export class LabInfoComponent implements OnInit {
       
       if(info[i].times != null && info[i].times != undefined){
         let labSchedule = info[i].times; //monday-saturday
-        console.log(labSchedule);
+
         for(let j = 0; j < labSchedule.length; j++){
           this.labinfo += '<td>';
           let weekDay = info[i].times[j];//individual day
+          
           for(let k = 0; k < weekDay.length; k++){
             let timeSlot = info[i].times[j][k]; // individual time slots
             this.labinfo += '<span>'+timeSlot+'</span><br>';
@@ -87,9 +88,8 @@ export class LabInfoComponent implements OnInit {
 
   editLabInfo(){
     //getting the correct lab information
-    console.log(this.editableLab);
     for (let i = 0; i < this.storeInfo.length; i++){
-      console.log(this.storeInfo[i]);
+      
       if(this.storeInfo[i].lab == this.editableLab){
         this.editingLab = this.storeInfo[i];
       }
@@ -134,9 +134,6 @@ export class LabInfoComponent implements OnInit {
     let newThursdayTimeELem = this.elRef.nativeElement.querySelectorAll('.thurs');
     let newFridayTimeELem = this.elRef.nativeElement.querySelectorAll('.fri');
     let newSaturdayTimeELem = this.elRef.nativeElement.querySelectorAll('.sat');
-
-    console.log(this.elRef.nativeElement.querySelectorAll('.mon'));
-    
 
     let times = [];
     let mon = [];

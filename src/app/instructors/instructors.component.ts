@@ -24,7 +24,6 @@ export class InstructorsComponent implements OnInit {
     });
 
     this.adminService.getAdmins(this.group).subscribe((result:any) => {
-      console.log(result);
       this.admins = result.admins;
     });
   }

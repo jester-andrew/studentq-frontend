@@ -25,7 +25,6 @@ export class LabAssistantsComponent implements OnInit {
     });
 
     this.adminService.getAdmins(this.group).subscribe((result:any) => {
-      console.log(result);
       this.admins = result.admins;
     }); 
   }
@@ -52,8 +51,6 @@ export class LabAssistantsComponent implements OnInit {
 
   openModal(){
     this.modal = true;
-    console.log('being called');
-    
   }
 
   exitModal(){

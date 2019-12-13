@@ -49,8 +49,7 @@ export class QueComponent implements OnInit {
     this.qservice.getLabs().subscribe((result:any) => {
       let options = '<option value="" disabled selected>Choose Lab</option>';
       for(let i = 0; i < result.labs.length; i++){
-        console.log(result.labs[i].alias);
-        console.log(this.selectedLab);
+        
         if(result.labs[i].alias === this.selectedLab){
           options += '<option selected>'+result.labs[i].alias+'</option>'
         }else{
@@ -72,7 +71,6 @@ export class QueComponent implements OnInit {
       .getRequest()
       .subscribe((requestString: string) => {
         let request = JSON.parse(requestString);
-        console.log(request);
         this.studentRequests = request;
       });
 
@@ -80,14 +78,12 @@ export class QueComponent implements OnInit {
       .getRow()
       .subscribe((requestString: string) =>{
           let request = JSON.parse(requestString);
-          console.log(request);
           this.studentRequests = request;
           //open the help modal
         
           for(let i = 0; i < this.studentRequests.length; i++){
             if(this.studentRequests[i]._id == this.helpingID){
               this.helpingRow = this.studentRequests[i];
-              console.log(this.studentRequests[i]);
             }
           }
 
@@ -100,7 +96,6 @@ export class QueComponent implements OnInit {
   }
 
   labChange(lab:string){
-    console.log(lab);
     localStorage.setItem('selectedLab', lab);
     this.selectedLab = lab;
     this.getHelpRequests();
@@ -137,8 +132,7 @@ export class QueComponent implements OnInit {
       question: problem,
       campus: location,
       email: email,
-      collection: this.selectedLab,
-      timeEnteredQue: Date.now()
+      collection: this.selectedLab
     }
     this.qservice.insertRequest(request);
     this.register = false;
