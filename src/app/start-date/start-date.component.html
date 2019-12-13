@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <p class="alert alert-info" *ngIf="ismessage">{{message}}</p>
+    <h2>System Set Up</h2>
+    <p class="alert alert-danger">This form prepares the system for a new semester. Old data in the system will be removed and archived. No data will be available for lab reports until students come to get help in the lab. Only do this for the start of a new semester!</p>
+
+    <form>
+        <div class="form-group">
+            <label for="date">When does the new semester start?</label>
+            <input type="date" id="date" class="form-control" #date>
+
+            <button type="button" class="btn btn-danger" (click)="prepareSystem(date)">Prepare System</button>
+        </div>
+    </form>
+</div>

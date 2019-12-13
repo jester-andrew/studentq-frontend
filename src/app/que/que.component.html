@@ -1,6 +1,6 @@
 <div class="flex">
-    <button class="btn btn-success" (click)="openModal()">Request Help</button>
-    <select (change)="labChange(lab.value)" #lab [innerHTML]="labOptions | sanitizeHTML">
+    <button class="btn btn-success" (click)="openModal()" [disabled]="!labIsSelected">Request Help</button>
+    <select (change)="labChange(lab.value)" #lab [innerHTML]="labOptions | sanitizeHTML" [disabled]="loggedin">
       
       
     </select>

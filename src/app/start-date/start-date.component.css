@@ -1,0 +1,31 @@
+.wrapper {
+    width: 40%;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+input {
+    margin-bottom: 2em;
+}
+
+.form-group {
+    width: 50%;
+    margin: auto;
+}
+
+button {
+    float: right;
+}
+
+.alert {
+    margin-top: 2em;
+}

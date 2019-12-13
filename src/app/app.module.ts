@@ -13,6 +13,7 @@ import { LabAssistantsComponent } from './lab-assistants/lab-assistants.componen
 import { InstructorsComponent } from './instructors/instructors.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ReportsComponent } from './reports/reports.component';
+import { StartDateComponent } from './start-date/start-date.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ReportsComponent } from './reports/reports.component';
     LabAssistantsComponent,
     InstructorsComponent,
     CoursesComponent,
-    ReportsComponent
+    ReportsComponent,
+    StartDateComponent
   ],
   imports: [
     BrowserModule,

@@ -152,13 +152,20 @@ export class ReportsComponent implements OnInit {
   checkInvalidValue(value){
     if(Object.is(value.sec, NaN) || value.sec == Infinity || value.sec == -Infinity){
       value.sec = 'No Data';
+    }else if(value.sec < 10){
+      value.sec = '0'+value.sec;
     }
     if(Object.is(value.min, NaN) || value.min == Infinity || value.min == -Infinity){
       value.min = '';
+    }else if(value.min < 10){
+      value.min = '0'+value.min;
     }
     if(Object.is(value.hour, NaN) || value.hour == Infinity || value.hour == -Infinity){
       value.hour = '';
+    }else if(value.hour < 10){
+      value.hour = '0'+value.hour;
     }
+
     console.log(value);
     return value;
   }

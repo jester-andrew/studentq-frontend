@@ -7,7 +7,7 @@ import * as io from 'socket.io-client';
   providedIn: 'root'
 })
 export class QueServiceService {
-  domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
+  domain:string = 'http://localhost:5000/' /*|| 'https://vast-mesa-84900.herokuapp.com/'*/; 
   getHelpRequestAPI:string = this.domain + 'que';
   insertRestAPI:string = this.domain + 'enterq';
   getLabsAPI:string = this.domain + 'getLabs';

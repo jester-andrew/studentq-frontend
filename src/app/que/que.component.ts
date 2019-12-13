@@ -11,6 +11,7 @@ import { CourseService } from '../course.service';
 export class QueComponent implements OnInit {
 
   selectedLab: String = null;
+  labIsSelected:boolean = false;
   studentRequests:any;
   requestRows:any;
   register:boolean = false;
@@ -20,6 +21,8 @@ export class QueComponent implements OnInit {
   helpingRow: any;
   isHelping: boolean = false;
   helpingID:number;
+
+  loggedin:boolean = this.loginBroadcast.isLoggedin();
 
   // helping Row values
   startedTime;
@@ -39,6 +42,7 @@ export class QueComponent implements OnInit {
     this.selectedLab = localStorage.getItem('selectedLab');
     if(this.selectedLab != null){
       this.getHelpRequests();
+      this.labIsSelected = true;
     }
 
     //getting all lab values for dropdown
@@ -101,6 +105,7 @@ export class QueComponent implements OnInit {
     this.selectedLab = lab;
     this.getHelpRequests();
     this.getCourses();
+    this.labIsSelected = true;
   }
 
   getHelpRequests(){

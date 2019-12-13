@@ -8,6 +8,7 @@ import { LabAssistantsComponent } from './lab-assistants/lab-assistants.componen
 import { InstructorsComponent } from './instructors/instructors.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ReportsComponent } from './reports/reports.component';
+import { StartDateComponent } from './start-date/start-date.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'labAssistants', component: LabAssistantsComponent},
   {path: 'instructors', component: InstructorsComponent},
   {path: 'courses', component: CoursesComponent},
-  {path: 'reports', component: ReportsComponent}
+  {path: 'reports', component: ReportsComponent},
+  {path: 'semStart', component: StartDateComponent}
 ];
 
 @NgModule({
@@ -33,5 +35,6 @@ export const routingComponents = [
   LabAssistantsComponent, 
   InstructorsComponent,
   CoursesComponent,
-  ReportsComponent
+  ReportsComponent,
+  StartDateComponent
 ];
