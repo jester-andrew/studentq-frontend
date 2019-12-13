@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import * as io from 'socket.io-client';
+import { DomainService } from './domain.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QueServiceService {
-  domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
+  domain:string = this.ds.getDomain();
   getHelpRequestAPI:string = this.domain + 'que';
   insertRestAPI:string = this.domain + 'enterq';
   getLabsAPI:string = this.domain + 'getLabs';
@@ -32,7 +33,7 @@ export class QueServiceService {
   }
 
   private socket;
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private ds:DomainService) { 
     this.socket = io(this.domain);
   }
 

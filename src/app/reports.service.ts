@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { DomainService } from './domain.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportsService {
-  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
+  private domain:string = this.ds.getDomain(); 
   private bulkReportAPI = this.domain + 'bulkReport';
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private ds:DomainService) { }
 
   getBulkReport(){
     let auth = JSON.parse(sessionStorage.getItem('auth'));

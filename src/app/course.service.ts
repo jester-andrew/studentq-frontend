@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { DomainService } from './domain.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
-  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
+  private domain:string = this.ds.getDomain(); 
   private getCoursesAPI:string = this.domain + 'getCourses';
   private addCourseAPI:string = this.domain + 'addCourse';
   private deleteCourseAPI:string = this.domain + 'deleteCourse';
   private getlabCoursesAPI:string = this.domain + 'getlabCourses'
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ds:DomainService) { }
 
   getAllCourses(){
     return this.http.get(this.getCoursesAPI);

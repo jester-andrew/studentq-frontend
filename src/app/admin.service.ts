@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DomainService } from './domain.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
-  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
+  private domain:string = this.ds.getDomain();
   private addAdminAPI:string = this.domain + 'addAdmin';
   private deleteAdminAPI:string = this.domain + 'deleteAdmin';
   private getAdminAPI:string = this.domain + 'getAdmin';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ds:DomainService) { }
 
   addAdmin(admin){
     let body = JSON.stringify(admin);

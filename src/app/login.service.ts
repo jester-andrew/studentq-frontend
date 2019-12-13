@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import { DomainService } from './domain.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
+  private domain:string = this.ds.getDomain(); 
   private loginAPI:string = this.domain + 'login';
   private appPermissions:BehaviorSubject<String> = new BehaviorSubject<String>('{loggedin: false,permissionsLA:false,permissionPro:false,permissionAdm:false}');
   private taPermission:BehaviorSubject<String> = new BehaviorSubject<String>('{ta: false}');
   brodcast = this.appPermissions.asObservable();
   broadcastTA = this.taPermission.asObservable();
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private ds:DomainService) { 
     
   }
 

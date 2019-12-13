@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DomainService } from './domain.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LabInfoService {
 
-  private domain:string = /*'http://localhost:5000/' ||*/ 'https://vast-mesa-84900.herokuapp.com/'; 
+  private domain:string = this.ds.getDomain(); 
   private loginAPI:string = this.domain + 'getlabInfo';
   private updateAPI:string = this.domain + 'updatelabInfo';
   private systemInit:string = this.domain + 'init';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private ds:DomainService) { }
 
   getInfo(){
     return this.http.get(this.loginAPI);
