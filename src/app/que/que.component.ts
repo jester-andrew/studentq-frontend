@@ -72,6 +72,7 @@ export class QueComponent implements OnInit {
       .subscribe((requestString: string) => {
         let request = JSON.parse(requestString);
         this.studentRequests = request;
+        this.studentRequests.sort((a, b) => a.timeEnteredQue > b.timeEnteredQue? 1 : -1);
       });
 
     this.qservice
@@ -79,7 +80,7 @@ export class QueComponent implements OnInit {
       .subscribe((requestString: string) =>{
           let request = JSON.parse(requestString);
           this.studentRequests = request;
-          //open the help modal
+          this.studentRequests.sort((a, b) => a.timeEnteredQue > b.timeEnteredQue? 1 : -1);
         
           for(let i = 0; i < this.studentRequests.length; i++){
             if(this.studentRequests[i]._id == this.helpingID){
@@ -107,6 +108,7 @@ export class QueComponent implements OnInit {
     this.qservice.getRequests(this.selectedLab).subscribe((result) => {
         if(result['returnrd']){
           this.studentRequests = result['result'];
+          this.studentRequests.sort((a, b) => a.timeEnteredQue > b.timeEnteredQue? 1 : -1);
         }
     });
   }
